@@ -38,9 +38,9 @@ jobs:
         retention-days: 30
   deploy:
     name: Deploy Playwright Report
+    if: alaways()
     runs-on: ubuntu-latest
     needs: test  
-    if: alaways()
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
