@@ -25,6 +25,23 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+  deploy:
+    name: Deploy Playwright Report
+    runs-on: ubuntu-latest
+    needs: test
+    if: always()  
+    steps:
+      - name: Download report artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: playwright-report
+          path: ./playwright-report
+
+      - name: Deploy report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./playwright-report
   docker-test:
     name: Run Tests in Docker (staging)
     runs-on: ubuntu-latest

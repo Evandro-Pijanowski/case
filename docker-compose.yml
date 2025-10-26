@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./dist:/usr/share/nginx/html
+    networks:
+      - testing
+
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.48.0-jammy
+    depends_on:
+      - web
+    networks:
+      - testing
+    volumes:
+      - .:/tests
+    working_dir: /tests
+    command: >
+      bash -c "
+        npm ci &&
+        npx playwright install --with-deps &&
+        npx playwright test --reporter=html
+      "
+
+networks:
+  testing:
