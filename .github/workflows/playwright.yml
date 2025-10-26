@@ -18,7 +18,7 @@ jobs:
         run: docker pull mcr.microsoft.com/playwright:v1.56.1-noble
 
       - name: Run tests in Docker
-        run: docker run -it --rm --ipc=host mcr.microsoft.com/playwright:v1.56.1-noble /bin/bash
+        run: docker run --rm --ipc=host mcr.microsoft.com/playwright:v1.56.1-noble /bin/bash
         env:
          ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
