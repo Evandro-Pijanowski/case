@@ -23,7 +23,8 @@ jobs:
         run: docker pull mcr.microsoft.com/playwright:v1.56.1-noble
 
       - name: Run tests in Docker
-        run: docker run --rm -v ${{ github.workspace }}/logs:/app/logs -w /app playwright-tests
+        run: docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/playwright:v1.56.1-noble npx playwright test --reporter=list
+
       
       - name: Upload logs
         uses: actions/upload-artifact@v4
