@@ -18,4 +18,4 @@ COPY . .
 RUN chmod +x ./node_modules/.bin/* || true
 
 # Comando padrão para rodar os testes
-CMD ["npx", "playwright", "test"]
+CMD ["npx", "playwright", "test", "--reporter=list"]

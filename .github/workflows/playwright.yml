@@ -10,6 +10,11 @@ jobs:
   docker-test:
     runs-on: ubuntu-latest
 
+    env:
+         ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
+         ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+         BASE_URL: ${{ secrets.BASE_URL }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -18,8 +23,10 @@ jobs:
         run: docker pull mcr.microsoft.com/playwright:v1.56.1-noble
 
       - name: Run tests in Docker
-        run: docker run --rm --ipc=host mcr.microsoft.com/playwright:v1.56.1-noble /bin/bash
-        env:
-         ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
-         ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-         BASE_URL: ${{ secrets.BASE_URL }}
+        run: docker run --rm -v ${{ github.workspace }}/logs:/app/logs -w /app playwright-tests
+      
+      - name: Upload logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-logs
+          path: logs
