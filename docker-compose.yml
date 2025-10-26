@@ -2,10 +2,12 @@ version: '3.9'
 
 services:
   tests:
-    image: mcr.microsoft.com/playwright:v1.48.0-jammy
+    build:
+      context: ./tests
+      dockerfile: Dockerfile
     container_name: playwright-runner
     environment:
-      - BASE_URL=https://automationintesting.online
+      - BASE_URL=${BASE_URL}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     volumes:
