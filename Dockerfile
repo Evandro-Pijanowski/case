@@ -1,5 +1,5 @@
 # Etapa de build
-FROM mcr.microsoft.com/playwright:v1.56.1
+FROM node:20-bookworm
 
 WORKDIR /app
 
@@ -10,8 +10,7 @@ COPY playwright.config.ts ./
 # Instalar dependências
 ENV NODE_ENV=development
 RUN npm ci
-RUN npm install -D @playwright/test
-RUN npx playwright install --with-deps
+RUN npx -y playwright@1.56.1 install --with-deps
 
 # Copiar todos os outros arquivos do projeto
 COPY . .
