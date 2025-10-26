@@ -1,4 +1,4 @@
-name: CI/CD - Playwright 
+name: CI/CD - Playwright-Docker
 
 on:
   push:
@@ -7,13 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  docker-tests:
+  docker-test:
     runs-on: ubuntu-latest
-
-    env:
-      ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
-      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-      BASE_URL: ${{ secrets.BASE_URL }}
 
     steps:
       - name: Checkout
