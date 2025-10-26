@@ -1,5 +1,5 @@
 # Etapa de build
-FROM mcr.microsoft.com/playwright:v1.56.0-focal AS builder
+FROM mcr.microsoft.com/playwright:v1.56.1-noble
 
 WORKDIR /app
 
