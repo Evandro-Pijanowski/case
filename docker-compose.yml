@@ -1,22 +1,9 @@
-version: '3.9'
+version: '3.8'
 
 services:
   tests:
-    build:
-      context: ./tests
-      dockerfile: Dockerfile
-    container_name: playwright-runner
-    environment:
-      - BASE_URL=${BASE_URL}
-      - ADMIN_USERNAME=${ADMIN_USERNAME}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    build: .
     volumes:
-      - ./tests:/tests
-    working_dir: /tests
-    command: >
-      bash -c "
-        echo 'Iniciando testes Playwright...' &&
-        npm ci &&
-        npx playwright install --with-deps &&
-        npx playwright test --reporter=html
-      "
+      - ./:/app
+    working_dir: /app
+    command: npx playwright test
