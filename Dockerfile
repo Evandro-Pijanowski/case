@@ -9,6 +9,7 @@ COPY playwright.config.ts ./
 
 # Instalar dependências
 RUN npm ci
+RUN npm install @playwright/test@1.56.1
 
 # Copiar todos os outros arquivos do projeto
 COPY . .
