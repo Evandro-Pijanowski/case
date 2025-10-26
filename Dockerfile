@@ -10,7 +10,7 @@ COPY playwright.config.ts ./
 # Instalar dependências
 ENV NODE_ENV=development
 RUN npm ci
-RUN npm install @playwright/test@1.56.1
+RUN npm install -D @playwright/test
 RUN npx playwright install --with-deps
 
 # Copiar todos os outros arquivos do projeto
