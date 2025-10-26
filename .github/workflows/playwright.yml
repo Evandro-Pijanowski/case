@@ -1,33 +1,22 @@
-name: CI/CD - Playwright-Docker
-
+name: Playwright Tests
 on:
   push:
-    branches: [ "master" ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ "master" ]
-
+    branches: [ main, master ]
 jobs:
-  docker-test:
+  playwright:
+    name: 'Playwright Tests'
     runs-on: ubuntu-latest
-
-    env:
-         ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
-         ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-         BASE_URL: ${{ secrets.BASE_URL }}
-
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+      options: --user 1001
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Build Docker image
-        run: docker pull mcr.microsoft.com/playwright:v1.56.1-noble
-
-      - name: Run tests in Docker
-        run: docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/playwright:v1.56.1-noble npx playwright test --reporter=list
-
-      
-      - name: Upload logs
-        uses: actions/upload-artifact@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          name: playwright-logs
-          path: logs
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Run your tests
+        run: npx playwright test
