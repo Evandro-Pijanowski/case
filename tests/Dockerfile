@@ -4,9 +4,14 @@ WORKDIR /tests
 
 COPY package*.json ./
 COPY playwright.config.ts ./
-COPY e2e ./e2e
+
 
 RUN npm ci
+
+COPY . .
+
 RUN npx playwright install --with-deps
+
+ENV NODE_ENV=ci
 
 CMD ["npx", "playwright", "test", "--reporter=html"]
