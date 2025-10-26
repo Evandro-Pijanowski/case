@@ -25,3 +25,13 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+  docker-test:
+    name: Run Tests in Docker (staging)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Playwright in Docker Compose
+        run: docker-compose up --abort-on-container-exit --build
+
