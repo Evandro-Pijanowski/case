@@ -10,11 +10,6 @@ jobs:
   docker-test:
     runs-on: ubuntu-latest
 
-    env:
-      ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
-      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-      BASE_URL: ${{ secrets.BASE_URL }}
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,3 +19,7 @@ jobs:
 
       - name: Run tests in Docker
         run: docker run --rm -v ${{ github.workspace }}:/app -w /app voidr-tests
+        env:
+         ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
+         ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+         BASE_URL: ${{ secrets.BASE_URL }}
