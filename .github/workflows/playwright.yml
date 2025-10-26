@@ -10,18 +10,24 @@ jobs:
   docker-test:
     runs-on: ubuntu-latest
 
+    env:
+      ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
+      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      BASE_URL: ${{ secrets.BASE_URL }}
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build Docker image
-        run: docker build -t playwright-api-tests .
+      - name: Build and run Playwright tests
+        run: docker compose -f docker-compose.yml up --build --abort-on-container-exit
 
-      - name: Run tests
-        run: docker run --rm playwright-api-tests
+      - name: Copy Playwright Report
+        if: always()
+        run: docker cp playwright-runner:/tests/playwright-report ./playwright-report
 
-      - name: Upload logs
+      - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-logs
-          path: logs
+          name: playwright-report
+          path: playwright-report/
