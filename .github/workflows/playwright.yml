@@ -7,62 +7,8 @@ on:
 permissions:
   contents: write
 jobs:
-  test:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Cache Playwright browsers
-      uses: actions/cache@v4
-      with:
-        path: ~/.cache/ms-playwright
-        key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-playwright-
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test --reporter=html || true
-    - name: Merge test results into report folder
-      run: |
-        mkdir -p playwright-report/test-results
-        cp -r test-results/* playwright-report/test-results/ || true
-    - uses: actions/upload-artifact@v4
-      with:
-        name: playwright-report
-        path: playwright-report
-        retention-days: 30
-    - name: Add Playwright Report Link to Summary
-      if: always()
-      run: |
-        echo "Playwright Test Report" >> $GITHUB_STEP_SUMMARY
-        echo "[View HTML Report (via GitHub Pages)](https://pija-evandro.github.io/voidr-desafio/)" >> $GITHUB_STEP_SUMMARY
-  
-  deploy:
-    name: Deploy Playwright Report
-    if: always()
-    runs-on: ubuntu-latest
-    needs: test  
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Download report artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: playwright-report
-          path: ./playwright-report
-      - name: Deploy report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./playwright-report
   docker:
-    name: Run tests in docker container
+    name: Test exececution docker
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -83,4 +29,22 @@ jobs:
         run: |
           echo "Playwright Test Report" >> $GITHUB_STEP_SUMMARY
           echo "[View HTML Report (via GitHub Pages)](https://pija-evandro.github.io/voidr-desafio/)" >> $GITHUB_STEP_SUMMARY
+  deploy:
+    name: Deploy Playwright Report
+    if: always()
+    runs-on: ubuntu-latest
+    needs: test  
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Download report artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: playwright-report
+          path: ./playwright-report
+      - name: Deploy report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./playwright-report
   
