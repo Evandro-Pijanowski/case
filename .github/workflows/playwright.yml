@@ -71,6 +71,6 @@ jobs:
       - name: Build docker image
         run: docker build -t playwright-tests -f Dockerfile .
       - name: Run tests
-        run: docker run --rm -v ${{ github.workspace }}:/app -v ${{ github.workspace }}/playwright-report:/app/playwright-report -w /app playwright-tests
+        run: docker run --rm -v ${{ github.workspace }}:/app -v ${{ github.workspace }}/playwright-report:/app/playwright-report -w /app playwright-tests sh -c "npm install && npx playwright test"
       - name: Open test report
         run: open playwright-report/index.html
