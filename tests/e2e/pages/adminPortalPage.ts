@@ -65,11 +65,6 @@ export class AdminPortalPage {
            await this.page.getByText(roomType).isVisible();
     }
 
-    async deleteTestRoom(){
-        await this.page.locator('[id="4"]').click();
-        await this.page.locator('[id="4"]').isHidden();
-    }
-
     async expectNumAlert(){
         await expect(this.roomNumAlertMessage).toBeEnabled();
     }

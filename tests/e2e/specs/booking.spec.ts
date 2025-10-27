@@ -10,8 +10,9 @@ test.beforeEach(async ({ page }) => {
   await home.goTo();
 });
 
-test.describe('Booking tests', async () =>{
-   test('Booking - reserva com sucesso', async ({ page }) => {
+test.describe('Booking - Reservas', async () =>{
+   test.describe.configure({mode: 'parallel'});
+   test('TC08 - Deve reservar com sucesso', async ({ page }) => {
     const home = new HomePage(page);
     await home.clickBooking();  
     const booking = new BookingPage(page);
@@ -26,7 +27,7 @@ test.describe('Booking tests', async () =>{
 
   });
 
-  test('Booking - data valida check availability', async({ page }) => {
+  test('TC09 - Deve checar disponibilidade com data valida', async({ page }) => {
     const home = new HomePage(page);
     await home.fillDates(bookingDates.valid.checkIn, bookingDates.valid.checkOut);
     await home.checkAvailability();
@@ -35,7 +36,7 @@ test.describe('Booking tests', async () =>{
     await expect(page.getByText(bookingDates.numberOfNights.single)).toBeVisible();
   });
 
-  test('Booking - data invalida', async({ page }) => {
+  test('TC10 - Não deve permitir data de Check In posterior a de Check Out', async({ page }) => {
     const home = new HomePage(page);
     await home.fillDates(bookingDates.invalid.checkIn, bookingDates.invalid.checkOut);
     await home.checkAvailability();
@@ -45,7 +46,7 @@ test.describe('Booking tests', async () =>{
 
   });
 
-  test('Booking - erro nome em branco', async ({ page }) => {
+  test('TC11 - Não deve permitir nome em branco', async ({ page }) => {
     const home = new HomePage(page);
     await home.clickBooking();
     const booking = new BookingPage(page);
@@ -54,7 +55,7 @@ test.describe('Booking tests', async () =>{
     await booking.expectBookingError('name');
   });
 
-  test('Booking - erro email invalido', async ({ page }) => {
+  test('TC12 - Não deve permitir email inválido', async ({ page }) => {
     const home = new HomePage(page);
     await home.clickBooking();
     const booking = new BookingPage(page);
@@ -63,7 +64,7 @@ test.describe('Booking tests', async () =>{
     await booking.expectBookingError('email');
   });
 
-  test('Booking - erro sobrenome invalido', async ({ page }) => {
+  test('TC13 - Não deve permitir sobrenome inválido', async ({ page }) => {
     const home = new HomePage(page);
     await home.clickBooking();
     const booking = new BookingPage(page);

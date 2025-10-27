@@ -14,8 +14,9 @@ test.beforeEach(async({ page }) => {
     await adminPortal.expectLoggedIn();
 });
 
-test.describe('Portal do Administrador', () => {
-    test('Aba mensagens', async ({ page }) => {
+test.describe('Admin - Portal', () => {
+    test.describe.configure({mode: 'parallel'});
+    test('TC16 - Deve exibir a pagina de mensagens', async ({ page }) => {
         const adminPortal = new AdminPortalPage(page);
         await adminPortal.openMessages();
         await expect(page).toHaveURL(/admin\/message/);
@@ -23,7 +24,7 @@ test.describe('Portal do Administrador', () => {
         await expect(message.subjectField).toBeVisible();
     });
 
-    test('Criar quarto', async({ page }) => {
+    test('TC17 - Deve criar quarto com dados validos', async({ page }) => {
         const adminPortal = new AdminPortalPage(page);
         await adminPortal.createRoom(roomInfo.valid.roomNumber, roomInfo.valid.Type, roomInfo.valid.accessible,
             roomInfo.valid.price, [roomInfo.valid.roomDetails.amenities1, roomInfo.valid.roomDetails.amenities2]);
@@ -32,24 +33,23 @@ test.describe('Portal do Administrador', () => {
         await roomPage.expectCreateRoom( roomInfo.valid.Type, roomInfo.valid.accessible,
             [roomInfo.valid.roomDetails.amenities1, roomInfo.valid.roomDetails.amenities2], roomInfo.valid.price);
         await adminPortal.goTo();
-        await adminPortal.deleteTestRoom(); 
     });
 
-    test('Criar quarto com numero invalido', async({ page }) => {
+    test('TC18 - Não deve criar quarto com numero invalido', async({ page }) => {
         const adminPortal = new AdminPortalPage(page);
         await adminPortal.createRoom(roomInfo.invalid.roomNumber, roomInfo.valid.Type, roomInfo.valid.accessible,
             roomInfo.valid.price, [roomInfo.valid.roomDetails.amenities1, roomInfo.valid.roomDetails.amenities2]);
         await adminPortal.expectNumAlert(); 
     });
 
-    test('Criar quarto com preço negativo', async({ page }) => {
+    test('TC19 - Não deve criar quarto com preço negativo', async({ page }) => {
         const adminPortal = new AdminPortalPage(page);
         await adminPortal.createRoom(roomInfo.valid.roomNumber, roomInfo.valid.Type, roomInfo.valid.accessible,
             roomInfo.invalid.price, [roomInfo.valid.roomDetails.amenities1, roomInfo.valid.roomDetails.amenities2]);
         await adminPortal.expectPriceAlert(); 
     });
 
-    test('Admin - logout com sucesso', async ({ page }) => {
+    test('TC20 - logout com sucesso', async ({ page }) => {
         const adminPortal = new AdminPortalPage(page);
         await adminPortal.logOut();
         const home = new HomePage(page);

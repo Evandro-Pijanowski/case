@@ -43,7 +43,7 @@ jobs:
       run: |
         echo "Playwright Test Report" >> $GITHUB_STEP_SUMMARY
         echo "[View HTML Report (via GitHub Pages)](https://pija-evandro.github.io/voidr-desafio/)" >> $GITHUB_STEP_SUMMARY
-
+  
   deploy:
     name: Deploy Playwright Report
     if: always()
@@ -62,3 +62,14 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./playwright-report
+  
+  docker:
+    name: Run tests in docker container
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build docker image
+        run: docker build -t playwright-tests .
+      - name: Run tests
+        run: docker run --rm -v $(pwd):/app -v $(pwd)/playwright-report:/app/playwright-report -w /app playwright-tests
+      - name: Open test report
+        run: open playwright-report/index.html
