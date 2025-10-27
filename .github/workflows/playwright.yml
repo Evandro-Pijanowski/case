@@ -33,7 +33,7 @@ jobs:
     name: Deploy Playwright Report
     if: always()
     runs-on: ubuntu-latest
-    needs: test  
+    needs: docker  
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
