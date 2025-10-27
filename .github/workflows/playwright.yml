@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build docker image
-        run: docker build -t playwright-tests -f ../../Dockerfile ../../
+        run: docker build -t playwright-tests -f Dockerfile .
       - name: Run tests
         run: docker run --rm -v $(pwd):/app -v $(pwd)/playwright-report:/app/playwright-report -w /app playwright-tests
       - name: Open test report
