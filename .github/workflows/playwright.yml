@@ -28,7 +28,7 @@ jobs:
         if: always()
         run: |
           echo "Playwright Test Report" >> $GITHUB_STEP_SUMMARY
-          echo "[View HTML Report (via GitHub Pages)](https://pija-evandro.github.io/voidr-desafio/)" >> $GITHUB_STEP_SUMMARY
+          echo "[View HTML Report (via GitHub Pages)](https://pija-evandro.github.io/voidr-desafio-tecnico/)" >> $GITHUB_STEP_SUMMARY
   deploy:
     name: Deploy Playwright Report
     if: always()
