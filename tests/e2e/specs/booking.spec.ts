@@ -18,6 +18,11 @@ test.describe('Booking - Reservas', async () =>{
     const booking = new BookingPage(page);
     await home.selectSingleRoom();
     await booking.submitBooking(userData.valid.name, userData.valid.lastName, userData.valid.email, userData.valid.phone);
+    const response = await page.waitForResponse((res) => res.status()===200);
+    const responseBody = await response.json();
+    expect(response.status()).toBe('200');
+    expect(responseBody.firstname).toBe(userData.valid.name);
+    expect(responseBody.lastname).toBe(userData.valid.lastName);
     await booking.expectBookingConfirmedMessage();
     await home.clickAdmin();
     const adminLogin = new AdminLoginPage(page);

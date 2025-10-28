@@ -36,7 +36,7 @@ export class AdminPortalPage {
     }
 
     async expectLoggedIn() {
-        await expect(this.page.getByRole('link', { name: 'Branding' })).toBeVisible();
+        await expect(this.page.getByRole('link', { name: 'Branding' })).toBeVisible({timeout: 15000});
     }
 
     async openMessages() {
@@ -47,7 +47,7 @@ export class AdminPortalPage {
         await expect(this.messageRows).toContainText(content);
     }
 
-    async createRoom(roomNum:string, roomType: string, roomAccess: string,
+    async createRoom(roomNum: string, roomType: string, roomAccess: string,
         roomPrice: string, roomDetails: string[]) {
             await this.roomNumField.fill(roomNum);
             await this.page.locator('#type').selectOption(roomType);
@@ -60,8 +60,8 @@ export class AdminPortalPage {
             await this.createRoomButton.click();
     }
 
-    async checkCreatedRoom(roomType: string){
-           await this.page.locator('div').filter({ hasText: /^400$/ }).click();
+    async checkCreatedRoom(roomNum: Number, roomType: string){
+           await this.page.getByText(roomNum.toString()).click();
            await this.page.getByText(roomType).isVisible();
     }
 

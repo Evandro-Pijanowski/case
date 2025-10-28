@@ -21,6 +21,7 @@ export class BookingPage {
     await this.page.getByRole('textbox', { name: 'Lastname' }).fill(lastName);
     await this.page.getByRole('textbox', { name: 'Email' }).fill(email);
     await this.page.getByRole('textbox', { name: 'Phone' }).fill(phone);
+    await this.page.keyboard.press('Home');
     await this.page.getByRole('button', { name: 'Reserve Now' }).click();
   }
 

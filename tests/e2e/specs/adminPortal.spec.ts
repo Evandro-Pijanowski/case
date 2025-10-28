@@ -26,9 +26,10 @@ test.describe('Admin - Portal', () => {
 
     test('TC17 - Deve criar quarto com dados validos', async({ page }) => {
         const adminPortal = new AdminPortalPage(page);
-        await adminPortal.createRoom(roomInfo.valid.roomNumber, roomInfo.valid.Type, roomInfo.valid.accessible,
+        const roomNum = Math.floor(Math.random() * (1000 - 400 + 1)) + 400;
+        await adminPortal.createRoom(roomNum.toString(), roomInfo.valid.Type, roomInfo.valid.accessible,
             roomInfo.valid.price, [roomInfo.valid.roomDetails.amenities1, roomInfo.valid.roomDetails.amenities2]);
-        await adminPortal.checkCreatedRoom(roomInfo.valid.Type);
+        await adminPortal.checkCreatedRoom(roomNum ,roomInfo.valid.Type);
         const roomPage = new RoomPage(page);
         await roomPage.expectCreateRoom( roomInfo.valid.Type, roomInfo.valid.accessible,
             [roomInfo.valid.roomDetails.amenities1, roomInfo.valid.roomDetails.amenities2], roomInfo.valid.price);
@@ -37,7 +38,7 @@ test.describe('Admin - Portal', () => {
 
     test('TC18 - Não deve criar quarto com numero invalido', async({ page }) => {
         const adminPortal = new AdminPortalPage(page);
-        await adminPortal.createRoom(roomInfo.invalid.roomNumber, roomInfo.valid.Type, roomInfo.valid.accessible,
+        await adminPortal.createRoom(roomInfo.invalid.roomNumber ,roomInfo.valid.Type, roomInfo.valid.accessible,
             roomInfo.valid.price, [roomInfo.valid.roomDetails.amenities1, roomInfo.valid.roomDetails.amenities2]);
         await adminPortal.expectNumAlert(); 
     });

@@ -1,0 +1,12 @@
+{
+  "totalRequests": 50,
+  "successful": 50,
+  "minResponseTime": 753.3530999999998,
+  "maxResponseTime": 1589.3125,
+  "avgResponseTime": 866.146384,
+  "tookTooLong": 50,
+  "threshold": 200,
+  "loadLevel": 50,
+  "endpoint": "/booking",
+  "timestamp": "2025-10-28T02:06:03.863Z"
+}
