@@ -35,7 +35,7 @@ test.describe('Teste de perfromance API',() =>{
 
     test('Load Test | POST /booking', async ({ request }) => {
         //Ajustar esses valores de acordo como o cenário
-        const treshold = performanceTresholds.fast;
+        const treshold = performanceTresholds.critical;
         const load = loadLevels.medium;
         
         const promises = [];
