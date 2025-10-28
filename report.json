@@ -1,12 +1,12 @@
 {
   "totalRequests": 50,
   "successful": 50,
-  "minResponseTime": 738.933,
-  "maxResponseTime": 1704.5739,
-  "avgResponseTime": 1199.9813319999998,
-  "tookTooLong": 0,
-  "threshold": 2000,
+  "minResponseTime": 857.3659,
+  "maxResponseTime": 1967.7017,
+  "avgResponseTime": 1029.2865459999996,
+  "tookTooLong": 50,
+  "threshold": 200,
   "loadLevel": 50,
   "endpoint": "/booking",
-  "timestamp": "2025-10-28T07:49:28.447Z"
+  "timestamp": "2025-10-28T09:49:51.673Z"
 }
