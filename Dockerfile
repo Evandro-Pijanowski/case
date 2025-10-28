@@ -9,7 +9,7 @@ COPY package*.json ./
 
 # Instala dependências
 RUN npm install --force
-RUN npx playwright install --with-deps
+# RUN npx playwright install --with-deps
 
 # Copia o restante do código
 COPY . .do
