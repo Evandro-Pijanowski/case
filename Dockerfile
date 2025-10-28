@@ -9,7 +9,6 @@ COPY package*.json ./
 
 # Instala dependências
 RUN npm install --force
-RUN npm ci
 RUN npx playwright install --with-deps
 
 # Copia o restante do código
