@@ -95,6 +95,7 @@ Relatório de teste publicado automaticamente no Gihtub Pages
 
 ### Estrutura do Projeto
 
+```
 DesafioVoidr/
 ┣ .github/
 ┃ ┗ workflows/
@@ -160,7 +161,7 @@ DesafioVoidr/
 ┣ report.json                        # Arquivo com resultados de testes (gerado após execução).
 ┣ server.ts                          # Servidor do relatório e API GET/POST dos resultados do Loadtest   
 ┗ tsconfig.json                      # Configurações do TypeScript
-
+```
 
 ---
 Por [Evandro Pijanowski](https://github.com/pija-evandro) 
