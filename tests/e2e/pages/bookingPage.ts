@@ -31,7 +31,6 @@ export class BookingPage {
   }
 
   async expectBookingError(erro: string) {
-    await this.page.keyboard.press('Home');
     if(erro === 'name')
       await expect(this.page.getByText('Firstname should not be blank')).toHaveText('Firstname should not be blank');
     else if (erro === 'lastName')
