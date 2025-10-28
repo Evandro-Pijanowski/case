@@ -4,7 +4,7 @@
 
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
-Video de apresentação do projeto:
+Video de apresentação do projeto: https://www.loom.com/share/d92ec87f5d9f497caac48193a5026c33
 
 ### 📋 Pré-requisitos
 
