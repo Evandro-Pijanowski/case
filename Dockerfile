@@ -1,5 +1,5 @@
 # Base com browsers pré-instalados
-FROM mcr.microsoft.com/playwright:v1.37.0-focal
+FROM mcr.microsoft.com/playwright:v1.48.2-focal
 
 # Diretório de trabalho
 WORKDIR /app
