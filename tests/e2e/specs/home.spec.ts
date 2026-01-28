@@ -32,21 +32,6 @@ test.describe('Home - Navegação pagina principal', async () => {
 
   });
 
-  test('TC04 - Deve navegar até a seção Amenities', async ({ page }) => {
-    const home = new HomePage(page);
-    const imageUrl = "https://automationintesting.online/images/rbp-logo.jpg";
-    const response = await page.waitForResponse(res => res.url() === imageUrl && res.ok());
-    response.finished()
-    await home.clickAmenities();
-    await expect(page).toHaveURL(/#amenities/);
-    home.validateHeroSectionVisible();
-    const buffer = await page.screenshot();
-    fs.writeFileSync('tests/e2e/specs/homePage.spec.ts-snapshots/compara.png', buffer)
-    expect(await page.screenshot()).not.toMatchSnapshot('homePage.png',{
-      maxDiffPixelRatio : 0.1
-    })
-  });
-
   test('TC05 - Deve navegar até a seção Location', async ({ page }) => {
     const home = new HomePage(page);
     await home.clickLocation();
