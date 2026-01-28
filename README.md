@@ -1,5 +1,6 @@
 ### 🚀 Começando
 
+Site usado para a automação: https://automationintesting.online/
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
 ### 📋 Pré-requisitos
