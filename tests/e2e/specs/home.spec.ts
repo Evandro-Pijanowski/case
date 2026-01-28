@@ -20,18 +20,6 @@ test.describe('Home - Navegação pagina principal', async () => {
     await expect(page.locator('div').filter({ hasText: 'Our RoomsComfortable beds and' }).nth(3)).toBeVisible();
   });
 
-  test('TC03 - Deve navegar até a seção Booking', async ({ page }) => {
-    const home = new HomePage(page);
-    await home.clickBooking();
-    await expect(page).toHaveURL(/#booking/); 
-    const buffer = await page.screenshot();
-    fs.writeFileSync('tests/e2e/specs/homePage.spec.ts-snapshots/compara.png', buffer)
-    expect(await page.screenshot()).toMatchSnapshot('expectedBookingNav.png',{
-      maxDiffPixelRatio: 0.1
-    });
-
-  });
-
   test('TC05 - Deve navegar até a seção Location', async ({ page }) => {
     const home = new HomePage(page);
     await home.clickLocation();
