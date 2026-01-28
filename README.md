@@ -1,5 +1,3 @@
-### Desafio Voidr
-
 ### 🚀 Começando
 
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
@@ -20,8 +18,8 @@ Para configurar o ambiente e executar os testes, siga os passos abaixo:
 
 ```
 #Clonar o repositorio
-git clone https://github.com/pija-evandro/desafio-voidr.git
-cd desafio-voidr
+git clone https://github.com/pija-evandro/case.git
+cd case
 ```
 ```
 #Instale as dependências
